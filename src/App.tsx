@@ -2002,8 +2002,8 @@ export default function App() {
             <div className="h-9 w-9 rounded-[12px] bg-lime-400 text-black font-black flex items-center justify-center">A</div>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <div className="font-black tracking-[-0.03em] text-[14px] md:text-[15px] leading-none whitespace-nowrap">SMB V3.9.52 COLLAPSE FIXED - KLIK ▲ JADI MINI</div>
-                <div className="hidden md:inline-flex mono text-[9px] px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-300 border border-lime-400/20">V36 ORIGINAL • MINIMAL • FINISHING AT START</div>
+                <div className="font-black tracking-[-0.03em] text-[14px] md:text-[15px] leading-none whitespace-nowrap">ANTRIAN CETAK SMB DIGITAL PRINTING</div>
+                <div className="hidden md:inline-flex mono text-[9px] px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-300 border border-lime-400/20">AUTHENTIC BY INDRA</div>
               </div>
               <div className="mono hidden md:block text-[10px] text-zinc-500 mt-1 tracking-[0.12em]">GZ C3200 • CANON • CUT-H • CUT-G • SEAM • LAM • QC • SELESAI</div>
             </div>
