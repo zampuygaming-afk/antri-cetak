@@ -1999,7 +1999,7 @@ export default function App() {
       <header className="sticky top-0 z-20 backdrop-blur-xl bg-[#0a0a0b]/90 border-b border-zinc-900">
         <div className="max-w-[1920px] mx-auto px-3 md:px-5 h-[64px] flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="h-9 w-9 rounded-[12px] bg-lime-400 text-black font-black flex items-center justify-center">A</div>
+            <div className="h-9 w-9 rounded-[12px] bg-lime-400 text-black font-black flex items-center justify-center">SMB</div>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <div className="font-black tracking-[-0.03em] text-[14px] md:text-[15px] leading-none whitespace-nowrap">ANTRIAN CETAK SMB DIGITAL PRINTING</div>
