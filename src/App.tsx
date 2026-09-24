@@ -126,15 +126,22 @@ const ALL_MATERIAL_OPTIONS = [
   { id: "F340", label: "F340 Flexi 340", group: "GZ" },
   { id: "F440", label: "F440 Flexi 440", group: "GZ" },
   { id: "F500", label: "F500 Flexi 500", group: "GZ" },
-  { id: "RITRAMA", label: "RITRAMA Sticker Ritrama", group: "GZ" },
-  { id: "BLUISH", label: "BLUISH Sticker Bluish", group: "GZ" },
+  { id: "RITRAMA 105", label: "Ritrama 105", group: "GZ" },
+  { id: "RITRAMA 127", label: "Ritrama 127", group: "GZ" },
+  { id: "RITRAMA 152", label: "Ritrama 152", group: "GZ" },
+  { id: "BLUISH 105", label: "Bluish 105", group: "GZ" },
   { id: "ONEWAY", label: "ONEWAY Sticker Oneway", group: "GZ" },
   { id: "ALBATROS", label: "ALBATROS Albatros", group: "GZ" },
   { id: "DURATRANS", label: "DURATRANS Duratrans", group: "GZ" },
   { id: "BACKLIT", label: "BACKLIT", group: "GZ" },
-  { id: "AP260", label: "AP260 Art Paper 260", group: "CANON" },
-  { id: "IVORY", label: "IVORY", group: "CANON" },
-  { id: "VINYL", label: "VINYL Sticker Vinyl", group: "CANON" },
+  { id: "AP120", label: "Art Paper 120", group: "CANON" },
+  { id: "AP150", label: "Art Paper 150", group: "CANON" },
+  { id: "AP210", label: "Art Paper 210", group: "CANON" },
+  { id: "AP260", label: "Art Paper 260", group: "CANON" },
+  { id: "AP300", label: "Art Paper 300", group: "CANON" },
+  { id: "AP310", label: "Art Paper 310", group: "CANON" },
+  { id: "VINYL STANDAR", label: "Vinyl Standar", group: "CANON" },
+  { id: "VINYL QUANTAC", label: "Vinyl Quantac", group: "CANON" },
   { id: "TRANSPARAN", label: "TRANSPARAN", group: "CANON" },
   { id: "FLEX CHINA", label: "FLEX CHINA", group: "GZ" },
 ];
@@ -160,25 +167,9 @@ const CANON_OPTS: FinishingOpt[] = [
 ];
 
 function seedJobs(): Job[] {
-  const now = new Date();
-  const iso = (h: number) => new Date(now.getTime() - h * 3600000).toISOString();
-  return [
-    { id: "260923-020", customer: "Warung Sate Ibu", material: "F280", size: "3x1", qtyLabel: "3x1m - 2pcs", lengthM: 6, route: ["GZ", "SEAM", "QC"], routeIndex: 0, status: "antri", createdAt: iso(2), note: "List merah, tanpa laminasi", createdBy: "Rizka", priority: "member" },
-    { id: "260923-019", customer: "Laundry Express", material: "RITRAMA", size: "2x3", qtyLabel: "2x0.8m - 5pcs", lengthM: 8, route: ["GZ", "CUT-G", "QC"], routeIndex: 0, status: "antri", createdAt: iso(2.5), note: "Glossy laminasi", createdBy: "Uzi", priority: "express" },
-    { id: "260923-018", customer: "Toko Baju Anak Ceria", material: "FLEX CHINA", size: "2x1", qtyLabel: "2x1m - 1pcs", lengthM: 2, route: ["GZ", "QC"], routeIndex: 0, status: "antri", createdAt: iso(3), createdBy: "Susan", priority: "reguler" },
-    { id: "260923-017", customer: "Kedai Kopi Senja", material: "VINYL", size: "1x1", qtyLabel: "1x0.6m - 10pcs", lengthM: 6, route: ["CANON", "CUT-G", "QC"], routeIndex: 0, status: "cetak", createdAt: iso(1), startedAt: iso(0.5), startedBy: "Riki", assignedOperator: "riki", createdBy: "Rizka", assignedBy: "Rizka", assignedAt: iso(1.2), priority: "reguler" },
-    { id: "260923-016", customer: "Klinik Gigi Sehat", material: "BACKLIT", size: "4x2", qtyLabel: "4x2m - 1pcs", lengthM: 8, route: ["GZ", "LAM", "QC"], routeIndex: 1, status: "antri", createdAt: iso(4), createdBy: "Indra", note: "Tunggu laminasi doff", priority: "member" },
-    { id: "260923-015", customer: "Bengkel Motor Jaya", material: "F280", size: "5x2", qtyLabel: "5x2m - 1pcs", lengthM: 10, route: ["GZ", "QC"], routeIndex: 0, status: "gagal", createdAt: iso(5), startedAt: iso(4.5), startedBy: "Adi", createdBy: "Uzi", priority: "reguler", failures: [{ at: iso(4.6), machine: "GZ", failKind: "CETAK", type: "meter", qtyP: 5, qtyL: 2, qtyTotalM: 1.2, reason: "Head mampet garis putih", by: "Adi" }] },
-    { id: "260923-014", customer: "Cafe Rasa Nusantara", material: "FLEX CHINA", size: "3x2", qtyLabel: "3x2m - 2pcs", lengthM: 12, route: ["GZ", "SEAM", "QC"], routeIndex: 3, status: "siap", createdAt: iso(6), startedAt: iso(3), startedBy: "Riki", createdBy: "Susan", priority: "reguler" },
-    { id: "260923-013", customer: "Percetakan Berkah", material: "ONEWAY", size: "2x1.5", qtyLabel: "2x1m - 3pcs", lengthM: 6, route: ["GZ", "QC"], routeIndex: 0, status: "antri", createdAt: iso(1.2), createdBy: "Uzi", priority: "express" },
-    { id: "260923-012", customer: "Warteg Bahari", material: "ALBATROS", size: "3x2", qtyLabel: "3x2m - 1pcs", lengthM: 6, route: ["GZ", "SEAM", "QC"], routeIndex: 1, status: "cetak", createdAt: iso(2.8), startedAt: iso(0.8), startedBy: "Adi", assignedOperator: "adi", createdBy: "Rizka", assignedBy: "Rizka", assignedAt: iso(2.9), priority: "member" },
-    { id: "260923-011", customer: "Distro Urban Style", material: "F280", size: "6x3", qtyLabel: "6x3m - 1pcs", lengthM: 18, route: ["GZ", "QC"], routeIndex: 0, status: "antri", createdAt: iso(0.3), createdBy: "Susan", priority: "reguler" },
-    { id: "260923-010", customer: "Rental PS Cakrawala", material: "RITRAMA", size: "0.5x2", qtyLabel: "0.5x0.4m - 20pcs", lengthM: 4, route: ["GZ", "LAM", "CUT-G", "QC"], routeIndex: 3, status: "siap", createdAt: iso(7), startedAt: iso(5), startedBy: "Tira", createdBy: "Tira", priority: "member" },
-    { id: "260923-009", customer: "PT Maju Bersama", material: "F440", size: "4x6", qtyLabel: "4x6m - 1pcs", lengthM: 24, route: ["GZ", "SEAM", "QC"], routeIndex: 3, status: "selesai", createdAt: iso(8), startedAt: iso(6), startedBy: "Indra", deliveredAt: iso(1), deliveredBy: "Indra", createdBy: "Indra", priority: "reguler" },
-    { id: "260923-008", customer: "Toko Jaya Baru", material: "F340", size: "2x1", qtyLabel: "2x1m - 3pcs", lengthM: 6, route: ["GZ", "QC"], routeIndex: 0, status: "antri", createdAt: iso(1.8), createdBy: "Rizka", priority: "reguler" },
-    { id: "260923-007", customer: "Sablon Kaos Keren", material: "F440", size: "3x2", qtyLabel: "3x2m - 1pcs", lengthM: 6, route: ["GZ", "QC"], routeIndex: 0, status: "antri", createdAt: iso(2.2), createdBy: "Uzi", priority: "member" },
-    { id: "260923-006", customer: "Konveksi Maju", material: "AP260", size: "A3", qtyLabel: "A3 - 50 lbr", lengthM: 25, route: ["CANON", "QC"], routeIndex: 0, status: "antri", createdAt: iso(0.8), createdBy: "Susan", priority: "express" },
-  ];
+  // FIX: return empty - jangan pakai dummy data lagi biar operator load akurat
+  // Dummy lama bikin Riki ada job padahal board kosong
+  return [];
 }
 function formatTime(iso?: string) {
   if (!iso) return "-";
@@ -210,19 +201,38 @@ function materialMatches(jobMaterial: string, chipId: string): boolean {
   if (chip === "F500") return jm.includes("F500") || jm.includes("500");
   if (chip === "ONEWAY" || chip === "ONE WAY") return jm.includes("ONEWAY") || jm.includes("ONE WAY") || jm.includes("ONE");
   if (chip === "BACKLIT") return jm.includes("BACKLIT") || jm.includes("BACKLITE");
-  return jm.includes(chip);
+  // FIX: RITRAMA & BLUISH family - chip RITRAMA 105/127/152 harus match job lama RITRAMA, dan sebaliknya
+  if (chip.startsWith("RITRAMA")) return jm.includes("RITRAMA");
+  if (chip.startsWith("BLUISH")) return jm.includes("BLUISH");
+  if (jm.startsWith("RITRAMA") && chip.includes("RITRAMA")) return true;
+  if (jm.startsWith("BLUISH") && chip.includes("BLUISH")) return true;
+  // AP family - AP120, AP150 dll harus match jika mengandung AP
+  if (chip.startsWith("AP") && jm.startsWith("AP")) {
+    // exact match untuk AP, tapi jika chip AP120 dan jm AP260 itu beda bahan, jangan match
+    return jm === chip || jm.includes(chip) || chip.includes(jm);
+  }
+  // VINYL family
+  if (chip.includes("VINYL") && jm.includes("VINYL")) return true;
+  return jm.includes(chip) || chip.includes(jm);
 }
 function classifyMaterial(mat: string): "FLEXI" | "STICKER" | "CANON" {
-  const m = mat.toUpperCase();
-  if (m.includes("AP260") || m.includes("IVORY") || m.includes("VINYL") || m.includes("TRANSPARAN") || m.includes("STIKER VINYL") || m.includes("CANON")) {
-    if (m.includes("RITRAMA") || m.includes("BLUISH") || m.includes("ONEWAY") || m.includes("ONE WAY")) {
-      return "STICKER";
-    }
-    if (m.includes("AP260") || m.includes("IVORY") || m.includes("TRANSPARAN")) return "CANON";
-    if (m === "VINYL" || m.includes("STIKER VINYL")) return "CANON";
+  const m = mat.toUpperCase().trim();
+  // STICKER family - Ritrama, Bluish, Oneway (mesin GZ tapi finishing sticker)
+  if (m.includes("RITRAMA") || m.includes("BLUISH") || m.includes("ONEWAY") || m.includes("ONE WAY")) {
+    return "STICKER";
+  }
+  // CANON family - semua Art Paper + Vinyl + Transparan
+  if (
+    m.startsWith("AP") || // AP120, AP150, AP210, AP260, AP300, AP310, AP + apapun
+    m.includes("ART PAPER") ||
+    m.includes("VINYL") ||
+    m.includes("TRANSPARAN") ||
+    m.includes("IVORY") ||
+    m.includes("CANON")
+  ) {
     return "CANON";
   }
-  if (m.includes("RITRAMA") || m.includes("BLUISH") || m.includes("ONEWAY") || m.includes("ONE WAY")) return "STICKER";
+  // Default FLEXI - F280, F340, F440, F500, ALBATROS, DURATRANS, BACKLIT, FLEX CHINA, dll
   return "FLEXI";
 }
 function getFinishingOptions(material: string): FinishingOpt[] {
@@ -417,7 +427,33 @@ export default function App() {
         const raw = window.localStorage.getItem(LS_JOBS);
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            // V3.9.20 DEEP CLEAN: buang dummy + repair route corrupt
+            let cleaned = parsed.filter((j: any) => !String(j.id).startsWith("260923-"));
+            // Repair route yang corrupt / missing
+            cleaned = cleaned.map((j: any) => {
+              if (!j.route || !Array.isArray(j.route) || j.route.length === 0 || j.routeIndex === undefined || j.routeIndex < 0 || j.routeIndex >= (j.route?.length || 0)) {
+                // fallback route berdasarkan material
+                const m = (j.material || "").toUpperCase();
+                let fallback: string[] = ["GZ","QC"];
+                if (m.startsWith("AP") || m.includes("VINYL") || m.includes("TRANSPARAN")) fallback = ["CANON","QC"];
+                else if (m.includes("RITRAMA") || m.includes("BLUISH") || m.includes("ONEWAY")) {
+                  // sticker default
+                  fallback = ["GZ","QC"];
+                }
+                return { ...j, route: j.route && j.route.length>0 ? j.route : fallback, routeIndex: 0, plannedRoute: j.plannedRoute || fallback };
+              }
+              return j;
+            });
+            // Filter job yang masih invalid setelah repair (route tetap gak ada)
+            cleaned = cleaned.filter((j: any) => j.route && Array.isArray(j.route) && j.route.length > 0);
+            if (cleaned.length !== parsed.length) {
+              try { window.localStorage.setItem(LS_JOBS, JSON.stringify(cleaned)); } catch {}
+              console.log(`[V3.9.20] Cleaned ${parsed.length - cleaned.length} corrupt/dummy jobs`);
+            }
+            if (cleaned.length > 0) return cleaned;
+            return [];
+          }
         }
       }
     } catch {}
@@ -443,6 +479,23 @@ export default function App() {
   const [detailJobId, setDetailJobId] = useState<string | null>(null);
   const [orderModal, setOrderModal] = useState(false);
   const [orderForm, setOrderForm] = useState<{
+    customer: string;
+    material: string;
+    type: "meter" | "lembar";
+    p: string;
+    l: string;
+    qty: string;
+    sizeLabel: string;
+    note: string;
+    priority: PriorityType;
+    finishing: string;
+  }>({ customer: "", material: "F280", type: "meter", p: "", l: "", qty: "", sizeLabel: "A3", note: "", priority: "reguler", finishing: "" });
+  // V3.9.20 SAFE
+  const [collapsedCards, setCollapsedCards] = useState<Record<string, boolean>>({});
+  const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
+  const [dragOverCol, setDragOverCol] = useState<string | null>(null);
+  const [editModal, setEditModal] = useState<null | { jobId: string }>(null);
+  const [editForm, setEditForm] = useState<{
     customer: string;
     material: string;
     type: "meter" | "lembar";
@@ -581,7 +634,19 @@ export default function App() {
         console.log("[Supabase V3.9.6] fetch result:", { dataCount: data?.length, error });
         if (error) throw error;
         if (mounted && data) {
-          const mapped = (data as any[]).map(fromDbRow);
+          let mapped = (data as any[]).map(fromDbRow);
+          // V3.9.20 CLEAN supabase data too
+          const before = mapped.length;
+          mapped = mapped.filter(j => !String(j.id).startsWith("260923-"));
+          mapped = mapped.map(j => {
+            if (!j.route || !Array.isArray(j.route) || j.route.length === 0 || j.routeIndex < 0 || j.routeIndex >= j.route.length) {
+              const cls = classifyMaterial(j.material || "");
+              const fb = cls === "CANON" ? ["CANON","QC"] : ["GZ","QC"];
+              return { ...j, route: fb, routeIndex: 0, plannedRoute: fb } as Job;
+            }
+            return j;
+          }).filter(j => j.route && j.route.length > 0);
+          if (mapped.length !== before) console.log(`[V3.9.20 Supabase] Cleaned ${before - mapped.length} corrupt jobs`);
           if (mapped.length > 0) setJobs(mapped);
           setSupabaseStatus("connected");
           setSupabaseErrorDetail(null);
@@ -643,21 +708,66 @@ export default function App() {
     try { window.localStorage.setItem(LS_JOBS, JSON.stringify(jobs)); } catch {}
   }, [jobs, supabaseStatus]);
 
+  // V3.9.20 FIX: Stats harus konsisten dengan board, jangan cuma filter status
+  const getJobsForColumnStats = (colId: string, allJobs: Job[]) => {
+    if (colId === "QC") return allJobs.filter((j) => j.status === "siap");
+    if (colId === "SELESAI") return allJobs.filter((j) => j.status === "selesai");
+    return allJobs.filter((j) => {
+      if (!(j.status === "antri" || j.status === "cetak" || j.status === "gagal")) return false;
+      if (String(j.id).startsWith("260923-")) return false;
+      if (!j.route || !Array.isArray(j.route) || j.route.length === 0 || j.routeIndex < 0 || j.routeIndex >= j.route.length) {
+        const cls = classifyMaterial(j.material || "");
+        const fallbackMachine = cls === "CANON" ? "CANON" : "GZ";
+        return colId === fallbackMachine;
+      }
+      return j.route[j.routeIndex] === colId;
+    });
+  };
+
   const stats = useMemo(() => {
-    const antri = jobs.filter((j) => j.status === "antri").length;
+    // Hitung antri dari yang beneran ada di board (GZ,CANON,CUT-H,CUT-G,SEAM,LAM) + yang status antri tapi route invalid
+    const allAntriVisible = COLUMNS.filter(c => c.id !== "QC" && c.id !== "SELESAI").reduce((acc, col) => acc + getJobsForColumnStats(col.id, jobs).length, 0);
+    // Fallback: job antri yang route-nya QC tapi status masih antri (orphan) -> anggap antri juga biar keliatan di stats
+    const orphanAntriQC = jobs.filter(j => j.status === "antri" && j.route && j.route[j.routeIndex] === "QC").length;
+    const antri = allAntriVisible + orphanAntriQC;
+    
     const cetak = jobs.filter((j) => j.status === "cetak").length;
     const siap = jobs.filter((j) => j.status === "siap").length;
     const selesai = jobs.filter((j) => j.status === "selesai").length;
     const totalM = jobs.reduce((a, b) => a + b.lengthM, 0);
     const selesaiM = jobs.filter((j) => j.status === "selesai").reduce((a, b) => a + b.lengthM, 0);
     const eff = totalM ? Math.round((selesaiM / totalM) * 100) : 0;
-    return { antri, cetak, siap, selesai, totalM, eff };
+    
+    // Debug orphan
+    const allVisibleIds = new Set(COLUMNS.flatMap(c => getJobsForColumnStats(c.id, jobs).map(j=>j.id)));
+    const ghostJobs = jobs.filter(j => (j.status === "antri" || j.status === "cetak" || j.status === "gagal" || j.status === "siap") && !allVisibleIds.has(j.id) && !String(j.id).startsWith("260923-") && j.status !== "selesai");
+    if (ghostJobs.length > 0) {
+      console.warn("[V3.9.20] GHOST JOBS DETECTED:", ghostJobs);
+    }
+    
+    return { antri, cetak, siap, selesai, totalM, eff, ghostCount: ghostJobs.length, ghostJobs };
   }, [jobs]);
 
+  // V3.9.20 FIX: Operator Load anti-bug Riki 1 job padahal board kosong
+  // - Hanya hitung ANTRI yang valid (route exists & routeIndex valid)
+  // - Hanya hitung yang lagi di PRINT step (GZ/CANON) biar finishing gak ikut load print
+  // - Auto-exclude job corrupt / route invalid / id dummy 260923-xxx
   const operatorLoads = useMemo(() => {
     return (ASSIGNABLE_IDS as readonly string[]).map((opId) => {
       const user = USERS.find((u) => u.id === opId);
-      const activeJobs = jobs.filter((j) => j.assignedOperator === opId && j.status !== "selesai");
+      const activeJobs = jobs.filter((j) => {
+        if (j.assignedOperator !== opId) return false;
+        if (j.status !== "antri") return false;
+        if (String(j.id).startsWith("260923-")) return false;
+        // route harus valid
+        if (!j.route || !Array.isArray(j.route) || j.route.length === 0) return false;
+        if (j.routeIndex < 0 || j.routeIndex >= j.route.length) return false;
+        const currentStep = j.route[j.routeIndex];
+        // Hanya hitung yang masih di PRINT (GZ/CANON), jangan yang udah di CUT/SEAM/LAM
+        // Kalau mau hitung semua antri, hapus baris ini
+        if (currentStep !== "GZ" && currentStep !== "CANON") return false;
+        return true;
+      });
       return {
         id: opId,
         label: user?.label || opId,
@@ -806,7 +916,7 @@ export default function App() {
       setCurrentUserId(user.id);
       setLoginError("");
       setPinInput("");
-      setToast(`Halo ${user.label} • V3.9.6 URL FIX FINAL ROLES`);
+      setToast(`Halo ${user.label} • V3.9.20 FIX RIKI LOAD`);
     } else {
       setLoginError(`Password salah untuk ${user.label}`);
     }
@@ -857,7 +967,7 @@ export default function App() {
       setToast(`🔒 Assigned ke ${USERS.find(u=>u.id===job.assignedOperator)?.label} - hanya ${USERS.find(u=>u.id===job.assignedOperator)?.label} & Indra bisa proses`);
       return;
     }
-    // V3.9.17 FIX BUG FINISHING LOOP: Jika sudah di tengah route (routeIndex >0) atau sudah punya finishingType, jangan buka modal finishing lagi!
+    // V3.9.20 FIX BUG FINISHING LOOP: Jika sudah di tengah route (routeIndex >0) atau sudah punya finishingType, jangan buka modal finishing lagi!
     // Ini yang bikin di video loop SEAM -> modal -> GZ -> SEAM lagi
     if (job.routeIndex > 0 || job.finishingType) {
       const nowIso = new Date().toISOString();
@@ -1006,7 +1116,7 @@ export default function App() {
     } else {
       const p = parseFloat(gagalForm.p);
       const l = parseFloat(gagalForm.l);
-      if (!p || p <= 0 || !l || l <= 0) { setToast("⚠️ Isi P x L meter gagal"); return; }
+      if (!p || p <= 0 || !l || l <= 0) { setToast("⚠️ Isi P x L cm gagal"); return; }
     }
     const newFail: FailureRecord = {
       at: new Date().toISOString(),
@@ -1016,13 +1126,13 @@ export default function App() {
       qtyLembar: gagalForm.type === "lembar" ? parseInt(gagalForm.lembar) : undefined,
       qtyP: gagalForm.type === "meter" ? parseFloat(gagalForm.p) : undefined,
       qtyL: gagalForm.type === "meter" ? parseFloat(gagalForm.l) : undefined,
-      qtyTotalM: gagalForm.type === "meter" ? parseFloat(gagalForm.p) * parseFloat(gagalForm.l) : undefined,
+      qtyTotalM: gagalForm.type === "meter" ? (parseFloat(gagalForm.p) * parseFloat(gagalForm.l)) / 10000 : undefined,
       reason: gagalForm.reason.trim(),
       by: currentUser.label,
     };
     setJobs((prev) => prev.map((j) => j.id === gagalModal.jobId ? { ...j, status: "gagal" as JobStatus, failures: [...(j.failures || []), newFail] } : j));
     await dbUpdate(gagalModal.jobId, { status: "gagal" as JobStatus, failures: [...(job.failures || []), newFail] } as any);
-    setToast(`❌ Gagal: ${gagalModal.machine} - ${gagalForm.type === "lembar" ? gagalForm.lembar + " lembar" : gagalForm.p + "x" + gagalForm.l + "m"} - ${gagalForm.reason}`);
+    setToast(`❌ Gagal: ${gagalModal.machine} - ${gagalForm.type === "lembar" ? gagalForm.lembar + " lembar" : gagalForm.p + "x" + gagalForm.l + "cm"} - ${gagalForm.reason}`);
     setGagalModal(null);
   };
   const handleRetry = async (id: string) => {
@@ -1067,7 +1177,7 @@ export default function App() {
     const job = jobs.find((j) => j.id === id);
     const totalLembar = job?.failures?.filter(f => f.type === "lembar").reduce((a, b) => a + (b.qtyLembar || 0), 0) || 0;
     const totalMeter = job?.failures?.filter(f => f.type === "meter").reduce((a, b) => a + (b.qtyTotalM || 0), 0) || 0;
-    const summary = job?.failures && job.failures.length > 0 ? `Gagal: ${totalLembar ? totalLembar + " lbr" : ""} ${totalMeter ? totalMeter.toFixed(2) + " m² (" + job.failures.filter(f=>f.type==="meter").map(f=>f.qtyP+"x"+f.qtyL).join(", ") + ")" : ""}`.trim() : undefined;
+    const summary = job?.failures && job.failures.length > 0 ? `Gagal: ${totalLembar ? totalLembar + " lbr" : ""} ${totalMeter ? totalMeter.toFixed(2) + " m² (" + job.failures.filter(f=>f.type==="meter").map(f=>f.qtyP+"x"+f.qtyL+"cm").join(", ") + ")" : ""}`.trim() : undefined;
     const nowIso = new Date().toISOString();
     setJobs((prev) => prev.map((j) => j.id === id ? { ...j, status: "selesai" as JobStatus, deliveredAt: new Date().toISOString(), deliveredBy: currentUser.label, deliveryNotes: note || j.deliveryNotes, failureSummary: summary || j.failureSummary } : j));
     await dbUpdate(id, { status: "selesai" as JobStatus, deliveredAt: nowIso, deliveredBy: currentUser.label, deliveryNotes: note || job?.deliveryNotes, failureSummary: summary || job?.failureSummary } as any);
@@ -1088,10 +1198,78 @@ export default function App() {
     }
   };
 
+  // V3.9.20 - Clear ghost jobs (antri tapi gak muncul di board)
+  const handleClearGhostJobs = async () => {
+    const allVisibleIds = new Set(COLUMNS.flatMap(c => {
+      if (c.id === "QC") return jobs.filter(j => j.status === "siap" || ((j.status === "antri" || j.status === "cetak") && j.route && j.route[j.routeIndex] === "QC")).map(j=>j.id);
+      if (c.id === "SELESAI") return jobs.filter(j => j.status === "selesai").map(j=>j.id);
+      return jobs.filter(j => {
+        if (!(j.status === "antri" || j.status === "cetak" || j.status === "gagal")) return false;
+        if (!j.route || !Array.isArray(j.route) || j.route.length === 0 || j.routeIndex < 0 || j.routeIndex >= j.route.length) return true; // will be fallback
+        return j.route[j.routeIndex] === c.id;
+      }).map(j=>j.id);
+    }));
+    const ghost = jobs.filter(j => !allVisibleIds.has(j.id) && j.status !== "selesai" && !String(j.id).startsWith("260923-"));
+    if (ghost.length === 0) {
+      setToast("✅ Tidak ada ghost jobs");
+      return;
+    }
+    if (!confirm(`Hapus ${ghost.length} ghost job(s)? ANTRI ${ghost.filter(j=>j.status==="antri").length} - Ini yang bikin ANTRI 1 tapi board kosong`)) return;
+    setJobs(prev => prev.filter(j => allVisibleIds.has(j.id) || j.status === "selesai"));
+    if (supabaseClient) {
+      for (const g of ghost) {
+        try { await supabaseClient.from("jobs").delete().eq("id", g.id); } catch {}
+      }
+    }
+    try {
+      const raw = window.localStorage.getItem(LS_JOBS);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        const cleaned = parsed.filter((j:any) => allVisibleIds.has(j.id) || j.status === "selesai");
+        window.localStorage.setItem(LS_JOBS, JSON.stringify(cleaned));
+      }
+    } catch {}
+    setToast(`🧹 ${ghost.length} ghost jobs dibersihkan`);
+  };
+
+  const handleForceResetAntri = async () => {
+    if (!confirm("RESET semua ANTRI jadi 0? Ini akan hapus semua job antri/cetak/gagal yang nyangkut (board kosong tapi ANTRI 1). Lanjutkan?")) return;
+    const toDelete = jobs.filter(j => j.status === "antri" || j.status === "cetak" || j.status === "gagal");
+    setJobs(prev => prev.filter(j => j.status === "siap" || j.status === "selesai"));
+    if (supabaseClient) {
+      for (const d of toDelete) {
+        try { await supabaseClient.from("jobs").delete().eq("id", d.id); } catch {}
+      }
+    }
+    try { window.localStorage.setItem(LS_JOBS, JSON.stringify(jobs.filter(j => j.status === "siap" || j.status === "selesai"))); } catch {}
+    setToast(`🔥 ${toDelete.length} jobs ANTRI/CETAK di-reset - sekarang ANTRI 0`);
+  };
+
+
+  // V3.9.20 FIX: getJobsForColumn dengan fallback anti job hilang + ghost visible
   const getJobsForColumn = (colId: string) => {
-    if (colId === "QC") return jobs.filter((j) => j.status === "siap");
+    if (colId === "QC") {
+      // QC harus show SIAP, tapi juga show ANTRI yang nyangkut di QC biar gak ghost
+      return jobs.filter((j) => {
+        if (String(j.id).startsWith("260923-")) return false;
+        if (j.status === "siap") return true;
+        // Ghost: antri tapi routeIndex sudah QC
+        if ((j.status === "antri" || j.status === "cetak") && j.route && j.route[j.routeIndex] === "QC") return true;
+        return false;
+      });
+    }
     if (colId === "SELESAI") return jobs.filter((j) => j.status === "selesai");
-    return jobs.filter((j) => (j.status === "antri" || j.status === "cetak" || j.status === "gagal") && j.route[j.routeIndex] === colId);
+    return jobs.filter((j) => {
+      if (!(j.status === "antri" || j.status === "cetak" || j.status === "gagal")) return false;
+      if (String(j.id).startsWith("260923-")) return false;
+      // Jika route corrupt / missing, fallback ke mesin berdasarkan material
+      if (!j.route || !Array.isArray(j.route) || j.route.length === 0 || j.routeIndex < 0 || j.routeIndex >= j.route.length) {
+        const cls = classifyMaterial(j.material || "");
+        const fallbackMachine = cls === "CANON" ? "CANON" : "GZ";
+        return colId === fallbackMachine;
+      }
+      return j.route[j.routeIndex] === colId;
+    });
   };
 
   const handleCreateOrder = async () => {
@@ -1112,11 +1290,12 @@ export default function App() {
       const l = parseFloat(orderForm.l) || 0;
       const qty = parseInt(orderForm.qty) || 1;
       if (p <= 0 || l <= 0) {
-        setToast("⚠️ Isi P dan L meter");
+        setToast("⚠️ Isi P dan L cm");
         return;
       }
-      lengthM = p * l * qty;
-      qtyLabel = `${p}x${l}m - ${qty}pcs`;
+      // Input CM -> convert ke m²: /10000
+      lengthM = (p * l * qty) / 10000;
+      qtyLabel = `${p}x${l}cm - ${qty}pcs`;
       size = `${p}x${l}`;
     } else {
       const qty = parseInt(orderForm.qty) || 0;
@@ -1194,6 +1373,156 @@ export default function App() {
       }, 200);
     } catch {}
   };
+
+  // V3.9.20 SAFE FEATURES
+  const toggleCardCollapse = (jobId: string) => {
+    setCollapsedCards(prev => ({ ...prev, [jobId]: !prev[jobId] }));
+  };
+  const collapseAllCards = () => {
+    const all: Record<string, boolean> = {};
+    jobs.forEach(j => { all[j.id] = true; });
+    setCollapsedCards(all);
+  };
+  const expandAllCards = () => setCollapsedCards({});
+
+  const handleCancelOrder = async (jobId: string) => {
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) return;
+    if (job.status !== "antri" && job.status !== "gagal") {
+      setToast("⛔ Hanya ANTRI/GAGAL yang bisa dibatalkan");
+      return;
+    }
+    if (!currentUser || !canAddOrderId(currentUser.id)) {
+      setToast("⛔ Hanya CS & Owner bisa batalkan");
+      return;
+    }
+    if (!confirm(`BATALKAN #${job.id} ${job.customer}?`)) return;
+    setJobs(prev => prev.filter(j => j.id !== jobId));
+    if (supabaseClient) { try { await supabaseClient.from("jobs").delete().eq("id", jobId); } catch {} }
+    try {
+      const raw = window.localStorage.getItem(LS_JOBS);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        const cleaned = parsed.filter((j:any) => j.id !== jobId);
+        window.localStorage.setItem(LS_JOBS, JSON.stringify(cleaned));
+      }
+    } catch {}
+    setToast(`🗑️ #${jobId} dibatalkan`);
+  };
+
+  const openEditModal = (jobId: string) => {
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) return;
+    if (job.status !== "antri") { setToast("⛔ Hanya ANTRI yang bisa edit"); return; }
+    if (!currentUser || !canAddOrderId(currentUser.id)) { setToast("⛔ Hanya CS & Owner bisa edit"); return; }
+    let p = "", l = "", qty = "1", sizeLabel = "A3";
+    if (job.size.includes("x")) {
+      const parts = job.size.split("x");
+      p = parts[0] || ""; l = parts[1] || "";
+    } else { sizeLabel = job.size || "A3"; }
+    const pcsMatch = job.qtyLabel.match(/(\d+)pcs/);
+    const lbrMatch = job.qtyLabel.match(/(\d+)\s*lbr/);
+    if (pcsMatch) qty = pcsMatch[1];
+    else if (lbrMatch) qty = lbrMatch[1];
+    const isLembar = job.qtyLabel.includes("lbr");
+    setEditForm({
+      customer: job.customer,
+      material: job.material,
+      type: isLembar ? "lembar" : "meter",
+      p, l, qty,
+      sizeLabel,
+      note: job.note || "",
+      priority: job.priority || "reguler",
+      finishing: job.finishingType || "",
+    });
+    setEditModal({ jobId });
+  };
+
+  const handleUpdateOrder = async () => {
+    if (!editModal) return;
+    const job = jobs.find(j => j.id === editModal.jobId);
+    if (!job) return;
+    if (!editForm.customer.trim()) { setToast("⚠️ Customer wajib"); return; }
+    let lengthM = job.lengthM;
+    let qtyLabel = job.qtyLabel;
+    let size = job.size;
+    if (editForm.type === "meter") {
+      const p = parseFloat(editForm.p) || 0;
+      const l = parseFloat(editForm.l) || 0;
+      const qty = parseInt(editForm.qty) || 1;
+      if (p<=0 || l<=0) { setToast("⚠️ P & L wajib"); return; }
+      lengthM = (p * l * qty) / 10000;
+      qtyLabel = `${p}x${l}cm - ${qty}pcs`;
+      size = `${p}x${l}`;
+    } else {
+      const qty = parseInt(editForm.qty) || 0;
+      if (qty<=0) { setToast("⚠️ Qty wajib"); return; }
+      lengthM = qty * 0.5;
+      qtyLabel = `${editForm.sizeLabel} - ${qty} lbr`;
+      size = editForm.sizeLabel;
+    }
+    const matOpt = ALL_MATERIAL_OPTIONS.find(m => m.id === editForm.material);
+    const machine = matOpt?.group === "CANON" ? "CANON" : "GZ";
+    const finishingOpts = getFinishingOptions(editForm.material);
+    const selectedFin = finishingOpts.find(o => o.label === editForm.finishing) || finishingOpts[0] || { label: "Potong Pas", route: machine === "CANON" ? ["CANON","QC"] : ["GZ","QC"], note: "" };
+    const finalRoute = selectedFin.route;
+    const updated: Partial<Job> = {
+      customer: editForm.customer.trim(),
+      material: editForm.material,
+      size, qtyLabel, lengthM,
+      route: finalRoute, routeIndex: 0,
+      note: editForm.note.trim() || undefined,
+      priority: editForm.priority,
+      finishingType: selectedFin.label,
+      finishingNote: selectedFin.label + (selectedFin.note ? ` • ${selectedFin.note}` : ""),
+      plannedRoute: finalRoute,
+    };
+    setJobs(prev => prev.map(j => j.id === editModal.jobId ? { ...j, ...updated } as Job : j));
+    await dbUpdate(editModal.jobId, updated);
+    setEditModal(null);
+    setToast(`✏️ #${editModal.jobId} di-update`);
+  };
+
+  const handleDragStart = (e: React.DragEvent, jobId: string) => {
+    setDraggedJobId(jobId);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", jobId);
+  };
+  const handleDragEnd = () => { setDraggedJobId(null); setDragOverCol(null); };
+  const handleDragOver = (e: React.DragEvent, colId: string) => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; setDragOverCol(colId); };
+  const handleDragLeave = () => setDragOverCol(null);
+  const handleDrop = async (e: React.DragEvent, targetColId: string) => {
+    e.preventDefault(); setDragOverCol(null);
+    const jobId = e.dataTransfer.getData("text/plain") || draggedJobId;
+    if (!jobId) return;
+    const job = jobs.find(j => j.id === jobId);
+    if (!job || !currentUser) return;
+    if (job.route[job.routeIndex] === targetColId) { setDraggedJobId(null); return; }
+    const routeIdx = job.route.indexOf(targetColId);
+    if (routeIdx === -1) {
+      if (isOwnerId(currentUser.id) && (targetColId === "GZ" || targetColId === "CANON")) {
+        const newRoute = targetColId === "CANON" ? ["CANON","QC"] : ["GZ","QC"];
+        const patch: Partial<Job> = { route: newRoute, routeIndex: 0, status: "antri" as JobStatus };
+        setJobs(prev => prev.map(j => j.id === jobId ? { ...j, ...patch } as Job : j));
+        await dbUpdate(jobId, patch);
+        setToast(`↔️ #${jobId} → ${targetColId} (Owner force)`);
+      } else {
+        setToast(`⛔ ${targetColId} bukan di route #${jobId} (${job.route.join("→")})`);
+      }
+      setDraggedJobId(null); return;
+    }
+    let newStatus: JobStatus = job.status;
+    if (targetColId === "QC") newStatus = "siap";
+    else if (targetColId === "SELESAI") newStatus = "selesai";
+    else newStatus = "antri";
+    if (!isOwnerId(currentUser.id) && routeIdx > job.routeIndex + 1) { setToast("⛔ Tidak bisa skip step"); setDraggedJobId(null); return; }
+    const patch: Partial<Job> = { routeIndex: routeIdx, status: newStatus };
+    setJobs(prev => prev.map(j => j.id === jobId ? { ...j, ...patch } as Job : j));
+    await dbUpdate(jobId, patch);
+    setToast(`↔️ #${jobId} → ${targetColId}`);
+    setDraggedJobId(null);
+  };
+
   const clearSupabaseSettings = () => {
     try {
       window.localStorage.removeItem(LS_SUPA_URL);
@@ -1234,11 +1563,17 @@ export default function App() {
     const priority = job.priority || "reguler";
     const priorityBadge = priority === "express" ? <div className="mono text-[9px] px-2 py-1 rounded-full bg-red-500 text-white font-bold animate-pulse">⚡ EXPRESS</div> : priority === "member" ? <div className="mono text-[9px] px-2 py-1 rounded-full bg-blue-500 text-white font-bold">MEMBER</div> : <div className="mono text-[9px] px-2 py-1 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700">REGULER</div>;
 
+    const isCollapsed = collapsedCards[job.id] || false;
+    const isDragging = draggedJobId === job.id;
     return (
-      <div key={job.id} className={`group relative rounded-[16px] border bg-zinc-900 border-zinc-800 p-3.5 flex flex-col gap-3 ${isDone ? "opacity-[0.85]" : ""} ${isCetak ? "ring-1 ring-lime-400/20 border-lime-400/20" : ""} ${isSiap ? "ring-1 ring-emerald-400/20 border-emerald-400/20" : ""} ${isGagal ? "ring-1 ring-red-500/20 border-red-500/20" : ""} ${priority==="express" && isAntri ? "ring-1 ring-red-500/30" : ""}`}>
-        <div className="flex items-start justify-between gap-2">
+      <div 
+        id={`job-card-${job.id}`}
+        key={job.id}
+        className={`group relative rounded-[16px] border bg-zinc-900 ${isCollapsed ? "border-lime-400/60 p-2.5 gap-1 bg-zinc-900/80" : "border-zinc-800 p-3.5 gap-3"} flex flex-col ${isDragging ? "opacity-40 ring-2 ring-lime-400/50" : ""} ${isDone ? "opacity-[0.85]" : ""} ${isCetak ? "ring-1 ring-lime-400/20 border-lime-400/20" : ""} ${isSiap ? "ring-1 ring-emerald-400/20 border-emerald-400/20" : ""} ${isGagal ? "ring-1 ring-red-500/20 border-red-500/20" : ""} ${priority==="express" && isAntri ? "ring-1 ring-red-500/30" : ""}`}>
+        <div className="flex items-start justify-between gap-2 cursor-grab active:cursor-grabbing" draggable={true} onDragStart={(e)=>handleDragStart(e, job.id)} onDragEnd={handleDragEnd}>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 flex-wrap">
+              <button type="button" onClick={(e)=>{ e.stopPropagation(); console.log('COLLAPSE CLICK', job.id); toggleCardCollapse(job.id); setToast(isCollapsed ? '📖 EXPAND #' + job.id : '📕 COLLAPSE #' + job.id + ' • jadi mini'); }} className="h-7 w-7 rounded-full bg-lime-400 border border-lime-500 flex items-center justify-center text-black font-black text-[12px] hover:bg-lime-300 active:scale-90 transition-all relative z-10"> {isCollapsed ? "▼" : "▲"} </button>
               <div className="mono text-[10px] font-bold tracking-[0.08em] px-2 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300">#{job.id}</div>
               {priorityBadge}
               {isAntri && <div className="mono text-[9px] px-2 py-1 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700">ANTRI</div>}
@@ -1302,7 +1637,7 @@ export default function App() {
             <div className="mono text-[9px] font-bold tracking-[0.1em] text-amber-300">HISTORY GAGAL • {failCount}</div>
             <div className="mt-1.5 space-y-1">
               {job.failures!.slice(-2).map((f, i) => (
-                <div key={i} className="mono text-[10px] text-amber-200/80 leading-[1.3]">• {f.machine} {f.failKind}: {f.type === "lembar" ? `${f.qtyLembar} lbr` : `${f.qtyP}x${f.qtyL}m (${f.qtyTotalM?.toFixed(2)}m²)`} - {f.reason}</div>
+                <div key={i} className="mono text-[10px] text-amber-200/80 leading-[1.3]">• {f.machine} {f.failKind}: {f.type === "lembar" ? `${f.qtyLembar} lbr` : `${f.qtyP}x${f.qtyL}cm (${f.qtyTotalM?.toFixed(2)}m²)`} - {f.reason}</div>
               ))}
               {failCount > 2 && <div className="mono text-[9px] text-amber-300/60">+{failCount - 2} lagi • klik DETAIL GAGAL</div>}
             </div>
@@ -1310,7 +1645,7 @@ export default function App() {
         )}
         {job.failureSummary && isDone && <div className="mono text-[10px] bg-amber-950/20 border border-amber-900/20 rounded-[12px] px-3 py-2 text-amber-200">⚠️ {job.failureSummary}</div>}
         {job.deliveryNotes && isDone && <div className="text-[11px] bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2 text-zinc-300">📦 {job.deliveryNotes}</div>}
-        <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+        <div style={{display: isCollapsed ? "none" : undefined}} className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
           <div className={`h-full rounded-full transition-all ${isGagal ? "bg-red-500" : isSiap ? "bg-emerald-400" : isDone ? "bg-zinc-600" : "bg-lime-400"}`} style={{ width: `${progress}%` }} />
         </div>
         <div className="flex items-center justify-between">
@@ -1323,8 +1658,14 @@ export default function App() {
           </div>
           {!isDone && <div className="mono text-[10px] text-zinc-600">{progress}%</div>}
         </div>
-        {job.note && !isDone && <div className="text-[11px] text-zinc-400 bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2 leading-[1.35]">📝 {job.note}</div>}
+        {job.note && !isDone && <div style={{display: isCollapsed ? "none" : undefined}} className="text-[11px] text-zinc-400 bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2 leading-[1.35]">📝 {job.note}</div>}
         <div className="pt-1 flex flex-col gap-2">
+          {isAntri && (
+            <div className="flex items-center gap-1">
+              {/* EDIT REMOVED */}
+              <button onClick={(e)=>{ e.stopPropagation(); handleCancelOrder(job.id); }} className="flex-1 mono text-[9px] font-bold bg-red-950/40 border border-red-900/40 text-red-300 py-1.5 rounded-[8px]">🗑️ BATAL</button>
+            </div>
+          )}
           {showAssignUI && (
             <div className="flex items-center gap-2 bg-[#0a0a0b] border border-lime-400/20 rounded-[14px] px-2.5 py-2">
               <div className="mono text-[9px] font-black tracking-[0.1em] text-lime-300 whitespace-nowrap">INDRA ASSIGN →</div>
@@ -1343,7 +1684,7 @@ export default function App() {
           )}
           {/* V3.9.5 FINAL ROLES - ANTRI */}
           {isAntri && isLocked && <button disabled className="w-full bg-zinc-800 border border-zinc-700 text-zinc-500 font-bold text-[11px] py-3 rounded-[14px] cursor-not-allowed" style={{ minHeight: "44px" }}>🔒 LOCKED • {lockedToName}</button>}
-          {isAntri && !isLocked && userCanStart && <button onClick={() => handleMulaiClick(job)} className="w-full bg-zinc-100 hover:bg-white text-black font-black tracking-[0.02em] text-[12px] py-3 rounded-[14px] active:scale-[0.98] transition-transform" style={{ minHeight: "44px", touchAction: "manipulation", cursor: "pointer" }}>▶ MULAI CETAK</button>}
+          <div style={{display: isCollapsed ? "none" : undefined}}>{isAntri && !isLocked && userCanStart && <button type="button" onClick={(e)=>{ e.stopPropagation(); handleMulaiClick(job); }} className="w-full bg-lime-400 hover:bg-lime-300 text-black font-black tracking-[0.02em] text-[12px] py-3 rounded-[14px] relative z-10" style={{ minHeight: "44px", cursor: "pointer" }}>▶ MULAI CETAK</button>}</div>
           {isAntri && !isLocked && !userCanStart && <button disabled title="Hanya Operator & Indra yang bisa MULAI CETAK" className="w-full bg-zinc-800 border border-zinc-700 text-zinc-500 font-bold text-[11px] py-3 rounded-[14px] cursor-not-allowed opacity-60" style={{ minHeight: "44px" }}>🔒 Hanya Operator & Indra</button>}
           {/* CETAK */}
           {isCetak && isLocked && <button disabled className="w-full bg-zinc-800 border border-zinc-700 text-zinc-500 font-bold text-[11px] py-3 rounded-[14px]">🔒 LOCKED • {lockedToName}</button>}
@@ -1383,7 +1724,7 @@ export default function App() {
           ::-webkit-scrollbar{height:8px;width:8px}
           ::-webkit-scrollbar-thumb{background:#27272a;border-radius:999px}
           ::-webkit-scrollbar-track{background:#0a0a0b}
-          /* V3.9.17 BOARD SCROLLBAR VISIBLE */
+          /* V3.9.20 BOARD SCROLLBAR VISIBLE */
           .custom-board-scroll{
             scrollbar-width:auto;
             scrollbar-color:#a3e635 #18181b;
@@ -1495,7 +1836,72 @@ export default function App() {
             </div>
           </div>
         </div>
-        {settingsOpen && (
+        {editModal && (
+        <div className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-sm flex items-end md:items-center justify-center p-3">
+          <div className="w-full max-w-[520px] bg-zinc-900 border border-zinc-800 rounded-[24px] p-5 shadow-2xl max-h-[92vh] overflow-y-auto">
+            <div className="flex items-center justify-between">
+              <div className="font-black text-[14px]">✏️ Edit Order #{editModal.jobId}</div>
+              <button onClick={()=>setEditModal(null)} className="h-8 w-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">✕</button>
+            </div>
+            <div className="mt-4 space-y-3">
+              <div>
+                <label className="mono text-[10px] text-zinc-500">CUSTOMER</label>
+                <input value={editForm.customer} onChange={(e)=>setEditForm(f=>({ ...f, customer: e.target.value }))} className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[13px] outline-none focus:border-lime-400/50" />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="mono text-[10px] text-zinc-500">MATERIAL</label>
+                  <select value={editForm.material} onChange={(e)=>setEditForm(f=>({ ...f, material: e.target.value }))} className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-3 py-3 text-[12px]">
+                    {ALL_MATERIAL_OPTIONS.map(m=> <option key={m.id} value={m.id}>{m.label} [{m.group}]</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="mono text-[10px] text-zinc-500">PRIORITY</label>
+                  <select value={editForm.priority} onChange={(e)=>setEditForm(f=>({ ...f, priority: e.target.value as PriorityType }))} className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-3 py-3 text-[12px]">
+                    <option value="reguler">REGULER</option>
+                    <option value="member">MEMBER</option>
+                    <option value="express">EXPRESS</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="mono text-[10px] text-zinc-500">TIPE</label>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  <button onClick={()=>setEditForm(f=>({ ...f, type: "meter" }))} className={`mono text-[11px] font-bold py-2.5 rounded-[12px] border ${editForm.type==="meter"?"bg-lime-400 text-black border-lime-400":"bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📏 P x L CM</button>
+                  <button onClick={()=>setEditForm(f=>({ ...f, type: "lembar" }))} className={`mono text-[11px] font-bold py-2.5 rounded-[12px] border ${editForm.type==="lembar"?"bg-lime-400 text-black border-lime-400":"bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📄 LEMBAR</button>
+                </div>
+              </div>
+              {editForm.type === "meter" ? (
+                <div className="grid grid-cols-3 gap-2">
+                  <div><label className="mono text-[10px] text-zinc-500">P (CM)</label><input value={editForm.p} onChange={(e)=>setEditForm(f=>({ ...f, p: e.target.value }))} className="mt-1 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2.5 text-[13px]" /></div>
+                  <div><label className="mono text-[10px] text-zinc-500">L (CM)</label><input value={editForm.l} onChange={(e)=>setEditForm(f=>({ ...f, l: e.target.value }))} className="mt-1 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2.5 text-[13px]" /></div>
+                  <div><label className="mono text-[10px] text-zinc-500">QTY</label><input value={editForm.qty} onChange={(e)=>setEditForm(f=>({ ...f, qty: e.target.value }))} className="mt-1 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2.5 text-[13px]" /></div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <div><label className="mono text-[10px] text-zinc-500">UKURAN KERTAS</label><select value={editForm.sizeLabel} onChange={(e)=>setEditForm(f=>({ ...f, sizeLabel: e.target.value }))} className="mt-1 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2.5 text-[13px]"><option value="A3">A3</option><option value="A3+">A3+</option><option value="A2">A2</option><option value="A1">A1</option><option value="1x1m">1x1m</option><option value="Custom">Custom</option></select></div>
+                  <div><label className="mono text-[10px] text-zinc-500">QTY LEMBAR</label><input value={editForm.qty} onChange={(e)=>setEditForm(f=>({ ...f, qty: e.target.value }))} className="mt-1 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2.5 text-[13px]" /></div>
+                </div>
+              )}
+              <div>
+                <label className="mono text-[10px] text-zinc-500">FINISHING</label>
+                <select value={editForm.finishing} onChange={(e)=>setEditForm(f=>({ ...f, finishing: e.target.value }))} className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-3 py-3 text-[12px]">
+                  {getFinishingOptions(editForm.material).map(o=> <option key={o.label} value={o.label}>{o.label} → {o.route.join("→")}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="mono text-[10px] text-zinc-500">NOTE</label>
+                <textarea value={editForm.note} onChange={(e)=>setEditForm(f=>({ ...f, note: e.target.value }))} rows={2} className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-3 py-2.5 text-[12px] resize-none" />
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <button onClick={()=>setEditModal(null)} className="mono text-[11px] font-bold bg-zinc-800 border border-zinc-700 text-zinc-400 py-3 rounded-[14px]">BATAL</button>
+                <button onClick={handleUpdateOrder} className="mono text-[11px] font-black bg-lime-400 text-black py-3 rounded-[14px]">SIMPAN EDIT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {settingsOpen && (
           <div className="fixed inset-0 z-[95] bg-black/70 backdrop-blur-sm flex items-end md:items-center justify-center p-3">
             <div className="w-full max-w-[480px] bg-zinc-900 border border-zinc-800 rounded-[24px] p-5 shadow-2xl">
               <div className="flex items-center justify-between">
@@ -1571,7 +1977,7 @@ export default function App() {
             <div className="h-9 w-9 rounded-[12px] bg-lime-400 text-black font-black flex items-center justify-center">A</div>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <div className="font-black tracking-[-0.03em] text-[14px] md:text-[15px] leading-none whitespace-nowrap">ANTRI CETAK V3.9.17 SUPABASE-READY V36 EXACT</div>
+                <div className="font-black tracking-[-0.03em] text-[14px] md:text-[15px] leading-none whitespace-nowrap">SMB V3.9.52 COLLAPSE FIXED - KLIK ▲ JADI MINI</div>
                 <div className="hidden md:inline-flex mono text-[9px] px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-300 border border-lime-400/20">V36 ORIGINAL • MINIMAL • FINISHING AT START</div>
               </div>
               <div className="mono hidden md:block text-[10px] text-zinc-500 mt-1 tracking-[0.12em]">GZ C3200 • CANON • CUT-H • CUT-G • SEAM • LAM • QC • SELESAI</div>
@@ -1601,7 +2007,7 @@ export default function App() {
               <div className={`h-7 w-7 rounded-full font-black text-[11px] flex items-center justify-center ${currentUser.id === "indra" ? "bg-lime-400 text-black ring-2 ring-lime-400/30" : "bg-zinc-700 text-zinc-200"}`}>{currentUser.initials}</div>
               <div className="pr-1">
                 <div className="text-[11px] font-bold leading-none flex items-center gap-1">{currentUser.label}{currentUser.id === "indra" && <span className="mono text-[8px] px-1 py-0 rounded bg-lime-400 text-black font-black">OWNER</span>}</div>
-                <div className="mono text-[9px] text-zinc-500 leading-none mt-1">V3.9.17 • {currentUser.id === "indra" ? "ASSIGN" : currentUser.role}</div>
+                <div className="mono text-[9px] text-zinc-500 leading-none mt-1">V3.9.20 • {currentUser.id === "indra" ? "ASSIGN" : currentUser.role}</div>
               </div>
             </div>
             <button onClick={handleLogout} className="mono text-[10px] bg-zinc-900 border border-zinc-800 hover:border-zinc-700 px-3 py-2 rounded-full text-zinc-400 min-h-[36px]">KELUAR</button>
@@ -1632,12 +2038,26 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div className="ml-auto hidden lg:flex items-center gap-2 mono text-[9px] text-zinc-500"><span>🔒 Hanya Indra bisa assign • V3.9.17 finishing di AWAL • {isSupabaseConnected ? "Supabase Connected" : "LocalStorage"}</span></div>
+              <div className="ml-auto hidden lg:flex items-center gap-2 mono text-[9px] text-zinc-500"><span>🔒 Hanya Indra bisa assign • V3.9.20 finishing di AWAL • {isSupabaseConnected ? "Supabase Connected" : "LocalStorage"}</span></div>
             </div>
           </div>
         )}
       </header>
       <main className="max-w-[1920px] mx-auto p-3 md:p-4">
+        {(stats as any).ghostCount > 0 && (
+          <div className="mx-3 mb-3 bg-amber-950/30 border border-amber-800/50 rounded-[12px] px-4 py-2.5 flex items-center justify-between">
+            <div className="mono text-[11px] text-amber-200">⚠️ GHOST JOB DETECTED: { (stats as any).ghostCount } job antri tapi tidak muncul di board (bikin ANTRI {(stats as any).antri} tapi kolom 0) - Klik bersihkan</div>
+            <div className="flex gap-2">
+              <button onClick={handleClearGhostJobs} className="mono text-[10px] font-bold bg-amber-500 text-black px-3 py-1.5 rounded-full">BERSIHKAN GHOST</button>
+              <button onClick={handleForceResetAntri} className="mono text-[10px] font-bold bg-red-500 text-white px-3 py-1.5 rounded-full">RESET ANTRI 0</button>
+            </div>
+          </div>
+        )}
+        <div className="flex items-center gap-2 px-3 pb-2">
+          <button onClick={collapseAllCards} className="mono text-[10px] bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full text-zinc-400 hover:text-white">📦 COLLAPSE ALL</button>
+          <button onClick={expandAllCards} className="mono text-[10px] bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full text-zinc-400 hover:text-white">📂 EXPAND ALL</button>
+          <span className="mono text-[9px] text-zinc-600 ml-2">💡 Drag card antar kolom • Klik ▲▼ untuk collapse</span>
+        </div>
         <div className="flex gap-3 overflow-x-auto overflow-y-hidden pb-6 snap-x snap-mandatory custom-board-scroll">
           {COLUMNS.map((col) => {
             const baseJobsRaw = getJobsForColumn(col.id);
@@ -1680,8 +2100,14 @@ export default function App() {
               filteredJobs = [...filteredJobs].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
             }
 
+            const isDragOver = dragOverCol === col.id;
             return (
-              <div key={col.id} className={`snap-start shrink-0 w-[304px] md:w-[320px] rounded-[24px] border bg-zinc-900/60 backdrop-blur flex flex-col ${isQC ? "border-emerald-900/30" : isSelesai ? "border-zinc-800" : "border-zinc-800"}`}>
+              <div 
+                key={col.id}
+                onDragOver={(e)=>handleDragOver(e, col.id)}
+                onDragLeave={handleDragLeave}
+                onDrop={(e)=>handleDrop(e, col.id)}
+                className={`snap-start shrink-0 w-[304px] md:w-[320px] rounded-[24px] border backdrop-blur flex flex-col transition-all ${isDragOver ? "bg-lime-400/10 border-lime-400/50 ring-2 ring-lime-400/30 scale-[1.02]" : "bg-zinc-900/60"} ${isQC ? "border-emerald-900/30" : isSelesai ? "border-zinc-800" : "border-zinc-800"}`}>
                 <div className="p-4 pb-3 flex flex-col gap-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
@@ -1737,7 +2163,7 @@ export default function App() {
         <div className="mt-2 flex flex-col gap-2">
           <div className="mono text-[10px] text-zinc-600 flex flex-wrap gap-3">
             <span className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${isSupabaseConnected ? "bg-emerald-400" : "bg-red-500"}`} />{isSupabaseConnected ? "Supabase Connected" : "LocalStorage - set Supabase URL"}</span>
-            <span>✔ V3.9.17 SUPABASE-READY V36 EXACT • GZ [ALL|F280|F340|F440|F500|RITRAMA|BLUISH|ONEWAY|ALBATROS|DURATRANS|BACKLIT] • CANON [ALL|AP260|IVORY|VINYL|TRANSPARAN]</span>
+            <span>✔ V3.9.20 SUPABASE-READY V36 EXACT • GZ [ALL|F280|F340|F440|F500|RITRAMA|BLUISH|ONEWAY|ALBATROS|DURATRANS|BACKLIT] • CANON [ALL|AP260|IVORY|VINYL|TRANSPARAN]</span>
             <span>• FINISHING AT START: Pilih finishing saat MULAI CETAK • PRIORITY: EXPRESS/MEMBER/REGULER sort ANTRI • ASSIGN LOCK: hanya assigned & Indra bisa proses</span>
           </div>
           <div className="mono text-[9px] text-zinc-500 bg-zinc-900 border border-zinc-800 rounded-[12px] px-3 py-2">
@@ -1759,7 +2185,7 @@ export default function App() {
               <div className="mono text-[11px] text-zinc-400 mt-2 bg-[#0a0a0b] border border-zinc-800 rounded-[12px] px-3 py-2">
                 Job <span className="font-bold text-zinc-200">#{startFinishingModal.jobId}</span> • {startFinishingModal.customer} • {startFinishingModal.material} • <span className="text-lime-300 font-bold">{cls}</span>
                 <br />
-                <span className="text-[10px] text-zinc-500">V3.9.17: Finishing ditentukan di AWAL saat MULAI CETAK, bukan di akhir. Pilih route finishing sekarang. Supabase: finishing_type + planned_route.</span>
+                <span className="text-[10px] text-zinc-500">V3.9.20: Finishing ditentukan di AWAL saat MULAI CETAK, bukan di akhir. Pilih route finishing sekarang. Supabase: finishing_type + planned_route.</span>
               </div>
               <div className="mt-4">
                 <div className="mono text-[10px] tracking-[0.12em] text-zinc-500">PILIH FINISHING ({cls})</div>
@@ -1801,7 +2227,7 @@ export default function App() {
               <div className="font-black text-[16px]">+ Tambah Order Baru</div>
               <button onClick={() => setOrderModal(false)} className="h-9 w-9 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 min-h-[36px]">✕</button>
             </div>
-            <div className="mono text-[10px] text-zinc-500 mt-1">V3.9.17 SUPABASE-READY • ID auto {new Date().toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "2-digit" })}-XXX • Finishing dipilih saat MULAI • Prioritas mempengaruhi urutan • {isSupabaseConnected ? "Supabase insert" : "LocalStorage fallback"}</div>
+            <div className="mono text-[10px] text-zinc-500 mt-1">V3.9.20 SUPABASE-READY • ID auto {new Date().toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "2-digit" })}-XXX • Finishing dipilih saat MULAI • Prioritas mempengaruhi urutan • {isSupabaseConnected ? "Supabase insert" : "LocalStorage fallback"}</div>
             <div className="mt-5 space-y-4">
               <div>
                 <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">NAMA CUSTOMER *</label>
@@ -1837,26 +2263,26 @@ export default function App() {
               <div>
                 <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">TIPE UKURAN</label>
                 <div className="mt-2 grid grid-cols-2 gap-2">
-                  <button onClick={() => setOrderForm((f) => ({ ...f, type: "meter" }))} className={`mono text-[11px] font-bold py-2.5 rounded-[12px] border min-h-[40px] ${orderForm.type === "meter" ? "bg-lime-400 text-black border-lime-400" : "bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📏 P x L METER</button>
+                  <button onClick={() => setOrderForm((f) => ({ ...f, type: "meter" }))} className={`mono text-[11px] font-bold py-2.5 rounded-[12px] border min-h-[40px] ${orderForm.type === "meter" ? "bg-lime-400 text-black border-lime-400" : "bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📏 P x L CM</button>
                   <button onClick={() => setOrderForm((f) => ({ ...f, type: "lembar" }))} className={`mono text-[11px] font-bold py-2.5 rounded-[12px] border min-h-[40px] ${orderForm.type === "lembar" ? "bg-lime-400 text-black border-lime-400" : "bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📄 LEMBAR</button>
                 </div>
               </div>
               {orderForm.type === "meter" ? (
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">P (M)</label>
-                    <input value={orderForm.p} onChange={(e) => setOrderForm((f) => ({ ...f, p: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="3" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
+                    <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">P (CM)</label>
+                    <input value={orderForm.p} onChange={(e) => setOrderForm((f) => ({ ...f, p: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="300" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
                   </div>
                   <div>
-                    <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">L (M)</label>
-                    <input value={orderForm.l} onChange={(e) => setOrderForm((f) => ({ ...f, l: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="1" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
+                    <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">L (CM)</label>
+                    <input value={orderForm.l} onChange={(e) => setOrderForm((f) => ({ ...f, l: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="100" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
                   </div>
                   <div>
                     <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">QTY PCS</label>
                     <input value={orderForm.qty} onChange={(e) => setOrderForm((f) => ({ ...f, qty: e.target.value.replace(/[^0-9]/g, "") }))} placeholder="2" inputMode="numeric" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
                   </div>
                   <div className="col-span-3 mono text-[10px] text-zinc-500 bg-[#0a0a0b] border border-zinc-800 rounded-[10px] px-3 py-2">
-                    Preview: {orderForm.p || "P"} x {orderForm.l || "L"}m - {orderForm.qty || "1"}pcs = {orderForm.p && orderForm.l && orderForm.qty ? (parseFloat(orderForm.p) * parseFloat(orderForm.l) * parseInt(orderForm.qty)).toFixed(1) + "m" : "-"} • Prioritas: {orderForm.priority.toUpperCase()}
+                    Preview: {orderForm.p || "P"} x {orderForm.l || "L"}cm - {orderForm.qty || "1"}pcs = {orderForm.p && orderForm.l && orderForm.qty ? ((parseFloat(orderForm.p) * parseFloat(orderForm.l) * parseInt(orderForm.qty))/10000).toFixed(2) + "m² (" + (parseFloat(orderForm.p)*parseFloat(orderForm.l)*parseInt(orderForm.qty)).toFixed(0) + "cm²)" : "-"} • Prioritas: {orderForm.priority.toUpperCase()}
                   </div>
                 </div>
               ) : (
@@ -1922,7 +2348,7 @@ export default function App() {
               <div className="mono text-[10px] tracking-[0.12em] text-zinc-500">TIPE GAGAL</div>
               <div className="mt-2 grid grid-cols-2 gap-2">
                 <button onClick={() => setGagalForm((f) => ({ ...f, type: "lembar" }))} className={`mono text-[12px] font-bold py-3 rounded-[14px] border min-h-[48px] ${gagalForm.type === "lembar" ? "bg-lime-400 text-black border-lime-400" : "bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📄 LEMBAR</button>
-                <button onClick={() => setGagalForm((f) => ({ ...f, type: "meter" }))} className={`mono text-[12px] font-bold py-3 rounded-[14px] border min-h-[48px] ${gagalForm.type === "meter" ? "bg-lime-400 text-black border-lime-400" : "bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📏 P x L METER</button>
+                <button onClick={() => setGagalForm((f) => ({ ...f, type: "meter" }))} className={`mono text-[12px] font-bold py-3 rounded-[14px] border min-h-[48px] ${gagalForm.type === "meter" ? "bg-lime-400 text-black border-lime-400" : "bg-zinc-800 border-zinc-700 text-zinc-400"}`}>📏 P x L CM</button>
               </div>
             </div>
             {gagalForm.type === "lembar" ? (
@@ -1933,14 +2359,14 @@ export default function App() {
             ) : (
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div>
-                  <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">P (PANJANG) METER</label>
-                  <input value={gagalForm.p} onChange={(e) => setGagalForm((f) => ({ ...f, p: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="Contoh: 5" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
+                  <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">P (PANJANG) CM</label>
+                  <input value={gagalForm.p} onChange={(e) => setGagalForm((f) => ({ ...f, p: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="Contoh: 300" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
                 </div>
                 <div>
-                  <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">L (LEBAR) METER</label>
-                  <input value={gagalForm.l} onChange={(e) => setGagalForm((f) => ({ ...f, l: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="Contoh: 0.8" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
+                  <label className="mono text-[10px] tracking-[0.12em] text-zinc-500">L (LEBAR) CM</label>
+                  <input value={gagalForm.l} onChange={(e) => setGagalForm((f) => ({ ...f, l: e.target.value.replace(/[^0-9.]/g, "") }))} placeholder="Contoh: 100" inputMode="decimal" className="mt-2 w-full bg-[#0a0a0b] border border-zinc-800 rounded-[14px] px-4 py-3 text-[14px] outline-none focus:border-lime-400/50 placeholder:text-zinc-600" />
                 </div>
-                <div className="col-span-2 mono text-[10px] text-zinc-500 bg-[#0a0a0b] border border-zinc-800 rounded-[10px] px-3 py-2">Total: {gagalForm.p && gagalForm.l ? `${(parseFloat(gagalForm.p) * parseFloat(gagalForm.l || "0")).toFixed(2)} m² (${gagalForm.p}x${gagalForm.l})` : "-"} • Flexi/F280 hitung meteran</div>
+                <div className="col-span-2 mono text-[10px] text-zinc-500 bg-[#0a0a0b] border border-zinc-800 rounded-[10px] px-3 py-2">Total: {gagalForm.p && gagalForm.l ? `${((parseFloat(gagalForm.p) * parseFloat(gagalForm.l || "0"))/10000).toFixed(2)} m² (${gagalForm.p}x${gagalForm.l}cm = ${(parseFloat(gagalForm.p)*parseFloat(gagalForm.l||"0")).toFixed(0)}cm²)` : "-"} • Flexi/F280 hitung CM</div>
               </div>
             )}
             <div className="mt-4">
@@ -1969,7 +2395,7 @@ export default function App() {
                 <div className="mt-2 space-y-2 max-h-[160px] overflow-y-auto">
                   {job.failures?.map((f,i)=>(
                     <div key={i} className="mono text-[11px] bg-zinc-900 border border-zinc-800 rounded-[10px] px-3 py-2 text-zinc-300 leading-[1.35]">
-                      <span className="font-bold text-amber-200">{f.machine} - {f.failKind}</span>: {f.type==="lembar" ? `${f.qtyLembar} lembar` : `${f.qtyP}x${f.qtyL}m = ${f.qtyTotalM?.toFixed(2)}m²`} • {f.reason} <span className="text-zinc-500">by {f.by} • {formatTime(f.at)}</span>
+                      <span className="font-bold text-amber-200">{f.machine} - {f.failKind}</span>: {f.type==="lembar" ? `${f.qtyLembar} lembar` : `${f.qtyP}x${f.qtyL}cm = ${f.qtyTotalM?.toFixed(2)}m²`} • {f.reason} <span className="text-zinc-500">by {f.by} • {formatTime(f.at)}</span>
                     </div>
                   ))}
                 </div>
@@ -2006,7 +2432,7 @@ export default function App() {
                 <div className="mt-2 space-y-2">
                   {detailJob.failures.map((f,i)=>(
                     <div key={i} className="bg-[#0a0a0b] border border-zinc-800 rounded-[14px] p-3">
-                      <div className="flex items-center justify-between mono text-[10px]"><span className="font-bold text-zinc-200">{f.machine} • {f.failKind} • {f.type==="lembar" ? `${f.qtyLembar} lembar` : `${f.qtyP}x${f.qtyL}m = ${f.qtyTotalM?.toFixed(2)}m²`}</span><span className="text-zinc-500">{formatDateTime(f.at)}</span></div>
+                      <div className="flex items-center justify-between mono text-[10px]"><span className="font-bold text-zinc-200">{f.machine} • {f.failKind} • {f.type==="lembar" ? `${f.qtyLembar} lembar` : `${f.qtyP}x${f.qtyL}cm = ${f.qtyTotalM?.toFixed(2)}m²`}</span><span className="text-zinc-500">{formatDateTime(f.at)}</span></div>
                       <div className="mt-2 text-[12px] text-zinc-300">Alasan: {f.reason}</div>
                       <div className="mt-1 mono text-[10px] text-zinc-500">Oleh: {f.by}</div>
                     </div>
@@ -2033,7 +2459,7 @@ export default function App() {
         <div className="fixed inset-0 z-[95] bg-black/70 backdrop-blur-sm flex items-end md:items-center justify-center p-3">
           <div className="w-full max-w-[480px] bg-zinc-900 border border-zinc-800 rounded-[24px] p-5 shadow-2xl max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between">
-              <div className="font-black text-[14px]">⚙️ Supabase Settings • V3.9.17</div>
+              <div className="font-black text-[14px]">⚙️ Supabase Settings • V3.9.20</div>
               <button onClick={()=>setSettingsOpen(false)} className="h-8 w-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">✕</button>
             </div>
             <div className="mono text-[10px] text-zinc-500 mt-2 leading-[1.5]">Simpan URL & Anon Key ke localStorage. Koneksi otomatis, realtime jobs-changes. Fallback LocalStorage jika belum set. Table: <span className="text-zinc-300">jobs</span><br/>SQL ada di footer board. Status: <span className={isSupabaseConnected ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>{supabaseStatus.toUpperCase()} • {isSupabaseConnected ? "Supabase Connected" : "LocalStorage - set Supabase URL"}</span></div>
