@@ -2005,7 +2005,7 @@ export default function App() {
                 <div className="font-black tracking-[-0.03em] text-[14px] md:text-[15px] leading-none whitespace-nowrap">ANTRIAN CETAK SMB DIGITAL PRINTING</div>
                 <div className="hidden md:inline-flex mono text-[9px] px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-300 border border-lime-400/20">AUTHENTIC BY INDRA</div>
               </div>
-              <div className="mono hidden md:block text-[10px] text-zinc-500 mt-1 tracking-[0.12em]">GZ C3200 • CANON • CUT-H • CUT-G • SEAM • LAM • QC • SELESAI</div>
+              <div className="mono hidden md:block text-[10px] text-zinc-500 mt-1 tracking-[0.12em]">CEK ORDERAN SETELAH DIBUAT, PASTIKAN SEUSAI DENGAN PESANAN CUSTOMER</div>
             </div>
           </div>
           <div className="hidden lg:flex items-center gap-2">
@@ -2188,11 +2188,9 @@ export default function App() {
         <div className="mt-2 flex flex-col gap-2">
           <div className="mono text-[10px] text-zinc-600 flex flex-wrap gap-3">
             <span className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${isSupabaseConnected ? "bg-emerald-400" : "bg-red-500"}`} />{isSupabaseConnected ? "Supabase Connected" : "LocalStorage - set Supabase URL"}</span>
-            <span>✔ V3.9.20 SUPABASE-READY V36 EXACT • GZ [ALL|F280|F340|F440|F500|RITRAMA|BLUISH|ONEWAY|ALBATROS|DURATRANS|BACKLIT] • CANON [ALL|AP260|IVORY|VINYL|TRANSPARAN]</span>
-            <span>• FINISHING AT START: Pilih finishing saat MULAI CETAK • PRIORITY: EXPRESS/MEMBER/REGULER sort ANTRI • ASSIGN LOCK: hanya assigned & Indra bisa proses</span>
           </div>
           <div className="mono text-[9px] text-zinc-500 bg-zinc-900 border border-zinc-800 rounded-[12px] px-3 py-2">
-            Supabase SQL untuk setup: <span className="text-zinc-300">create table jobs (id text primary key, customer text, material text, size text, qty_label text, length_m float8, route text[], route_index int4, status text, created_at timestamptz, created_by text, assigned_operator text, assigned_by text, assigned_at timestamptz, started_at timestamptz, started_by text, delivered_at timestamptz, delivered_by text, note text, failures jsonb, delivery_notes text, failure_summary text, priority text, finishing_note text, finishing_type text, planned_route text[], route_decisions jsonb); alter table jobs enable row level security; create policy "allow all" on jobs for all using (true) with check (true);</span> + enable Realtime for jobs.
+            DIBUAT KHUSUS UNTUK ANTRIAN SMB DIGITAL PRINTING - AUTHENTIC BY INDRA
           </div>
         </div>
       </main>
