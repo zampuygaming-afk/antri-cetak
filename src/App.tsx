@@ -1484,6 +1484,20 @@ export default function App() {
   };
 
   const handleDragStart = (e: React.DragEvent, jobId: string) => {
+    if (!currentUser) { e.preventDefault(); return; }
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) { e.preventDefault(); return; }
+    // FINAL ROLES: CS (uzi,rizka,susan) cannot drag - only operator+indra+tira can NEXT
+    if (!canStartPrintId(currentUser.id) && !isOwnerId(currentUser.id)) {
+      e.preventDefault();
+      setToast(`🔒 ${currentUser.label} CS tidak bisa drag • hanya Operator & Indra & Tira`);
+      return;
+    }
+    if (job.assignedOperator && job.assignedOperator !== currentUser.id && !isOwnerId(currentUser.id)) {
+      e.preventDefault();
+      setToast(`🔒 Assigned ke ${job.assignedOperator} • hanya ${job.assignedOperator} & Indra`);
+      return;
+    }
     setDraggedJobId(jobId);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/plain", jobId);
@@ -1516,6 +1530,17 @@ export default function App() {
     else if (targetColId === "SELESAI") newStatus = "selesai";
     else newStatus = "antri";
     if (!isOwnerId(currentUser.id) && routeIdx > job.routeIndex + 1) { setToast("⛔ Tidak bisa skip step"); setDraggedJobId(null); return; }
+    // FINAL ROLES: only operator+indra+tira can drag NEXT
+    if (!canStartPrintId(currentUser.id) && !isOwnerId(currentUser.id)) {
+      setToast(`🔒 ${currentUser.label} CS tidak bisa drag drop • hanya Operator & Indra & Tira bisa NEXT`);
+      setDraggedJobId(null);
+      return;
+    }
+    if (!canNextId(currentUser.id, job)) {
+      setToast(`🔒 Locked ke ${job.assignedOperator} • tidak bisa drag`);
+      setDraggedJobId(null);
+      return;
+    }
     const patch: Partial<Job> = { routeIndex: routeIdx, status: newStatus };
     setJobs(prev => prev.map(j => j.id === jobId ? { ...j, ...patch } as Job : j));
     await dbUpdate(jobId, patch);
@@ -1570,7 +1595,7 @@ export default function App() {
         id={`job-card-${job.id}`}
         key={job.id}
         className={`group relative rounded-[16px] border bg-zinc-900 ${isCollapsed ? "border-lime-400/60 p-2.5 gap-1 bg-zinc-900/80" : "border-zinc-800 p-3.5 gap-3"} flex flex-col ${isDragging ? "opacity-40 ring-2 ring-lime-400/50" : ""} ${isDone ? "opacity-[0.85]" : ""} ${isCetak ? "ring-1 ring-lime-400/20 border-lime-400/20" : ""} ${isSiap ? "ring-1 ring-emerald-400/20 border-emerald-400/20" : ""} ${isGagal ? "ring-1 ring-red-500/20 border-red-500/20" : ""} ${priority==="express" && isAntri ? "ring-1 ring-red-500/30" : ""}`}>
-        <div className="flex items-start justify-between gap-2 cursor-grab active:cursor-grabbing" draggable={true} onDragStart={(e)=>handleDragStart(e, job.id)} onDragEnd={handleDragEnd}>
+        <div className={`flex items-start justify-between gap-2 ${currentUser && (canStartPrintId(currentUser.id) || isOwnerId(currentUser.id)) ? "cursor-grab active:cursor-grabbing" : "cursor-default"} `} draggable={currentUser ? (canStartPrintId(currentUser.id) || isOwnerId(currentUser.id)) : false} onDragStart={(e)=>handleDragStart(e, job.id)} onDragEnd={handleDragEnd}>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 flex-wrap">
               <button type="button" onClick={(e)=>{ e.stopPropagation(); console.log('COLLAPSE CLICK', job.id); toggleCardCollapse(job.id); setToast(isCollapsed ? '📖 EXPAND #' + job.id : '📕 COLLAPSE #' + job.id + ' • jadi mini'); }} className="h-7 w-7 rounded-full bg-lime-400 border border-lime-500 flex items-center justify-center text-black font-black text-[12px] hover:bg-lime-300 active:scale-90 transition-all relative z-10"> {isCollapsed ? "▼" : "▲"} </button>
