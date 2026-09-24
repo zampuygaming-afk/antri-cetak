@@ -2063,7 +2063,7 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div className="ml-auto hidden lg:flex items-center gap-2 mono text-[9px] text-zinc-500"><span>🔒 Hanya Indra bisa assign • V3.9.20 finishing di AWAL • {isSupabaseConnected ? "Supabase Connected" : "LocalStorage"}</span></div>
+              <div className="ml-auto hidden lg:flex items-center gap-2 mono text-[9px] text-zinc-500"><span>SMB DIGITAL PRINTING • {isSupabaseConnected ? "Supabase Connected" : "LocalStorage"}</span></div>
             </div>
           </div>
         )}
