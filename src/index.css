@@ -1,0 +1,9 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* { font-family: 'Geist', system-ui, sans-serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+::-webkit-scrollbar { height: 6px; width: 6px; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 999px; }
+::-webkit-scrollbar-track { background: #0a0a0b; }

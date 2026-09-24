@@ -1,0 +1,15 @@
+
+LANGKAH SELANJUTNYA DI VS CODE (lihat screenshot kamu):
+
+1. Buka src/App.tsx -> cari line 82-97 (FINAL ROLES)
+2. Buka Terminal: Ctrl + `  (backtick)
+3. Ketik:
+   npm install
+   (tunggu selesai)
+4. Buat file .env sudah ada contoh .env.example -> ganti ANON KEY kamu yang full
+5. Ketik:
+   npm run dev
+6. Buka http://localhost:5173 -> login indra123 -> gear -> TEST CONNECTION harus ijo
+
+Jangan edit index.html yang 15 baris itu, itu cuma loader.
+Edit di src/App.tsx
