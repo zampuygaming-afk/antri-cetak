@@ -2201,6 +2201,7 @@ export default function App() {
         <div className="mt-2 flex flex-col gap-2">
           <div className="mono text-[10px] text-zinc-600 flex flex-wrap gap-3">
             <span className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${isSupabaseConnected ? "bg-emerald-400" : "bg-red-500"}`} />{isSupabaseConnected ? "Supabase Connected" : "LocalStorage - set Supabase URL"}</span>
+            <span>MASIH DALAM TAHAN PENGEMBANGAN, JADI BELUM BISA SUPPORT BANYAK HAL YAH, MAKASIH</span>
           </div>
         </div>
       </main>
