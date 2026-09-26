@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useAutoScroll } from "./hooks/useAutoScroll";
 
 type JobStatus = "antri" | "cetak" | "siap" | "selesai" | "gagal";
 type FailureType = "lembar" | "meter";
@@ -247,23 +248,30 @@ function generateJobId(existing: Job[]): string {
   const mm = String(now.getMonth() + 1).padStart(2, "0");
   const yy = String(now.getFullYear()).slice(-2);
   const prefix = `${dd}${mm}${yy}`;
-  const samePrefix = existing.filter((j) => j.id.startsWith(prefix));
-  let maxNum = 0;
-  samePrefix.forEach((j) => {
-    const parts = j.id.split("-");
-    if (parts.length === 2) {
-      const n = parseInt(parts[1], 10);
-      if (!isNaN(n) && n > maxNum) maxNum = n;
-    }
-  });
-  if (maxNum === 0) {
-    const allNums = existing.map((j) => {
-      const p = j.id.split("-")[1];
-      return parseInt(p || "0", 10);
-    });
-    maxNum = Math.max(0, ...allNums);
-  }
-  const next = maxNum + 1;
+
+  // FIX FINAL - 100% ANTI NaN
+  // Hanya hitung ID yang valid format DDMMYY-XXX dan TIDAK ada NaN
+  const nums = existing
+    .filter(j => {
+      if (!j?.id) return false;
+      const idStr = String(j.id);
+      if (idStr.includes("NaN")) return false;
+      if (!idStr.includes("-")) return false;
+      return idStr.startsWith(prefix + "-");
+    })
+    .map(j => {
+      const part = String(j.id).split("-")[1];
+      const n = parseInt(part, 10);
+      return isNaN(n) ? null : n;
+    })
+    .filter((n): n is number => n !== null && Number.isFinite(n));
+
+  const maxNum = nums.length > 0 ? Math.max(...nums) : 0;
+  const safeMax = Number.isFinite(maxNum) ? maxNum : 0;
+  const next = safeMax + 1;
+  
+  console.log(`[FIX ID] prefix=${prefix}, numsToday=`, nums, `max=${safeMax}, next=${next}`);
+  
   return `${prefix}-${String(next).padStart(3, "0")}`;
 }
 function priorityWeight(p?: PriorityType): number {
@@ -494,6 +502,7 @@ export default function App() {
   const [collapsedCards, setCollapsedCards] = useState<Record<string, boolean>>({});
   const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
   const [dragOverCol, setDragOverCol] = useState<string | null>(null);
+  const boardScrollRef = useAutoScroll(draggedJobId !== null);
   const [editModal, setEditModal] = useState<null | { jobId: string }>(null);
   const [editForm, setEditForm] = useState<{
     customer: string;
@@ -2083,7 +2092,7 @@ export default function App() {
           <button onClick={expandAllCards} className="mono text-[10px] bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full text-zinc-400 hover:text-white">📂 EXPAND ALL</button>
           <span className="mono text-[9px] text-zinc-600 ml-2">💡 Drag card antar kolom • Klik ▲▼ untuk collapse</span>
         </div>
-        <div className="flex gap-3 overflow-x-auto overflow-y-hidden pb-6 snap-x snap-mandatory custom-board-scroll">
+        <div ref={boardScrollRef} className="flex gap-3 overflow-x-auto overflow-y-hidden pb-6 snap-x snap-mandatory custom-board-scroll scroll-smooth">
           {COLUMNS.map((col) => {
             const baseJobsRaw = getJobsForColumn(col.id);
             const isQC = col.id === "QC";
